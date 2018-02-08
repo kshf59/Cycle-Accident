@@ -1,3 +1,4 @@
 .httr-oauth
-.csv
-.xlsx
+*.csv
+*.xlsx
+*.xls
