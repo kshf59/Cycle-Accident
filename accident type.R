@@ -1,5 +1,5 @@
 library(readxl)
-accident_type <- read_excel("accident type.xlsx", 
+accident_type <- read_excel("Cycle Accident/accident type.xlsx", 
                             col_types = c("numeric", "text", "text", 
                                           "text", "numeric", "numeric", "numeric", 
                                           "numeric", "numeric", "numeric", 
@@ -66,13 +66,21 @@ act2 <- act %>%  filter(시군구 == "합계" & 구분 == "발생건수")
 ggplot(data = act2, aes(x= year, y=총합계, fill = 구분)) + geom_bar(stat = "identity")
 act2
 
-# 종로구 사고구분별 막대그래프
-act3 <- act %>% filter(시군구 != "합계" & 시군구 == "종로구")
+# 2016  사고구분별 막대그래프
+act3 <- act %>% filter(year == "2016" & 시군구 == "합계" & 시군구 == "합계")
 act3 <- ggplot(act3, aes(x = year, y = 총합계, fill = 구분)) + geom_col(position = "dodge")
 act3
 
-# 2012 ~ 2016 년 각 시군구별 발생건수 박스플롯
-act4 <- act %>% filter(시군구 != "합계" & 구분 == "발생건수") %>% arrange(시군구)
-act4 <- ggplot(act4, aes(x = 시군구, y = 총합계, fill = 시군구)) + geom_boxplot()
-act4 <- act4 + theme(axis.text.x = element_text(angle=30, hjust=1, vjust=1)) # 눈금 라벨을 30도 기울인다.
-act4
+# 2012 ~2016년 각 시군구별 발생건수 선그래프
+act4 <- act %>%  filter(시군구 != "합계" & 구분 == "발생건수")
+ggplot(act4, aes(x = year, y = 총합계, group = 시군구, colour = 시군구)) + geom_line(lwd=1) + geom_point(lwd=1)
+
+# 2016년 사고구분별 자전거 사
+act5 <- act %>% filter(year == "2016" & 시군구 == "합계" & 구분 == "발생건수")
+act5 <- c(act6$차대사람합계, act6$차대차합계, act6$차량단독합계)
+
+barplot(act5,
+        names.arg = c("차대사람","차대차","차량단독"),
+        main = "자전거 사고 종류"
+        )
+

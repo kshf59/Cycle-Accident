@@ -1,6 +1,9 @@
 library(ggmap)
 library(ggplot2)
 library(dplyr)
+library(readr)
+X2016_cycle_accident <- read_csv("Cycle Accident/2016 cycle accident.csv")
+
 
 X2016 <- arrange(X2016_cycle_accident, 스팟코드)
 X2016[1:188,5] <- "서울특별시"
@@ -21,3 +24,11 @@ kor.map + geom_text(data=X2016,
                     size=2.5)
 
 
+# 발생건수 10 이상
+
+ten <- X2016 %>% filter(발생건수 >= 10)
+ten <- ten[-2,]
+ten <- ten[-2,]
+ten <- ten[-2,]
+ten <- ten[-6,]
+View(ten)

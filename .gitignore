@@ -2,3 +2,12 @@
 *.csv
 *.xlsx
 *.xls
+*.jpg
+*.png
+*.dbf
+*.prj
+*.sbn
+*.sbx
+*.shp
+*.shx
+*.xml

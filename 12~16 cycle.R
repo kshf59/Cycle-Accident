@@ -2,6 +2,11 @@ library(ggmap)
 library(ggplot2)
 library(dplyr)
 
+library(readr)
+X2012_2014_cycle_accident <- read_csv("Cycle Accident/2012_2014 cycle accident.csv")
+X2015_cycle_accident <- read_csv("Cycle Accident/2015 cycle accident.csv")
+X2016_cycle_accident <- read_csv("Cycle Accident/2016 cycle accident.csv")
+
 X2012_14 <- arrange(X2012_2014_cycle_accident, 스팟코드)
 X2012_14[1:576,5] <- "서울특별시"
 X2012_14 <- filter(X2012_14, 관할경찰서 == "서울특별시")

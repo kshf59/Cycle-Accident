@@ -1,5 +1,5 @@
 library(readxl)
-accident_time <- read_excel("accident time.xlsx", 
+accident_time <- read_excel("Cycle Accident/accident time.xlsx", 
                             col_types = c("numeric", "text", "text", 
                                           "text", "numeric", "numeric", "numeric", 
                                           "numeric", "numeric", "numeric", 
@@ -51,22 +51,27 @@ gd_labels <- paste(gd_rate, "%") # 그걸 퍼센트로 낸다
 library(plotrix)
 # 3D파이 그래프
 pie3D(time_total12,
-      main= "연령별 구성비",
+      main= "자전거사고 시간대 비율",
       col=rainbow(length(time_total12)), 
       labels=gd_labels,
       explode = 0.05
 )
-legend(0.8,1.1,c("0~2시","2~4시","4~6시","6~8시","8~10시","10~12시",
+legend(0.8,1.,c("0~2시","2~4시","4~6시","6~8시","8~10시","10~12시",
                "12~14시","14~16시","16~18시","18~20시","20~22시","22~24시"), 
        cex=0.5, fill=rainbow(length(time_total12)))
 
-#시간별 사고 현황
+pct <- round(time_total12/sum(time_total12)*100, 1)
+lab2 <- paste(pct, "%")
 
-barplot(time_total12,
-        main = "시간별 사고 현황",
-        xlab = "시간",
-        ylab = "현황",
-        col=rainbow(12),
-        names.arg=c("0~2","2~4","4~6","6~8","8~10","10~12","12~14","14~16","16~18","18~20","20~22","22~24")
-)
+# 파이 그래프
+pie(time_total12,
+    main = "시간별 자전거 사고",
+    label = lab2,
+    clockwise = TRUE,
+    init.angle = 50,
+    col = rainbow(length(time_total12))
+    )
+legend(1.2,1,c("0~2시","2~4시","4~6시","6~8시","8~10시","10~12시",
+                "12~14시","14~16시","16~18시","18~20시","20~22시","22~24시"), 
+       cex=0.5, fill=rainbow(length(time_total12)))
 
